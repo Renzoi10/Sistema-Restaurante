@@ -1,5 +1,8 @@
 package Vista;
 
+import Modelo.Sqlusuarios;
+import Modelo.usuarios;
+
 public class Reserva extends javax.swing.JFrame {
 
     public Reserva() {
@@ -111,7 +114,7 @@ public class Reserva extends javax.swing.JFrame {
         txtFecha.setDateFormatString("yyyy/MM/dd");
         jPanel4.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 210, -1));
 
-        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/icon_chek2.jpeg"))); // NOI18N
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/comprobado.png"))); // NOI18N
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -196,7 +199,7 @@ public class Reserva extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 680, 210));
 
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/btnRetroceder.jpeg"))); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/Icono_retroceder.jpeg"))); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -204,7 +207,7 @@ public class Reserva extends javax.swing.JFrame {
         });
         getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 50, 50));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/fondo_reservas2_1.jpeg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/reservaFondo.jpeg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         pack();
@@ -224,8 +227,21 @@ public class Reserva extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         opciones o = new opciones();
-        o.setVisible(true);
-        this.dispose();
+        opciones1 o1 = new opciones1();
+        Sqlusuarios su=new Sqlusuarios();
+        usuarios u;
+        String Nombre=o.txtNivel.getText();
+        int nivel;
+        u=su.AtraparAcces(Nombre);
+        nivel=u.getNivelacceso();
+       
+        if (nivel == 1 ) {      
+            o1.setVisible(true);
+            this.dispose();
+        } else {
+            o.setVisible(true);
+            this.dispose();
+        }
 
     }//GEN-LAST:event_btnCloseActionPerformed
 

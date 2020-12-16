@@ -1,8 +1,10 @@
 
 package Vista;
 
-import Controlador.Controlador;
+import Controlador.ControladorReservas;
 import Controlador.ControladorP;
+import Modelo.Sqlusuarios;
+import Modelo.usuarios;
 
 
 public class opciones extends javax.swing.JFrame {
@@ -28,6 +30,8 @@ public class opciones extends javax.swing.JFrame {
         btnFactura = new javax.swing.JButton();
         btnFinanzas = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        txtNivel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,13 +95,29 @@ public class opciones extends javax.swing.JFrame {
         });
         jPanel1.add(btnFinanzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 140, 140));
 
-        jButton5.setText("SALIR");
+        jButton5.setText("Mantenimiento");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 120, -1));
+
+        jButton6.setText("SALIR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 80, -1));
+
+        txtNivel.setEditable(false);
+        txtNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNivelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 80, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/opciones.jpeg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 430));
@@ -109,13 +129,15 @@ public class opciones extends javax.swing.JFrame {
 
     private void btnReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservaActionPerformed
         Reserva r = new Reserva();
-        Controlador c = new Controlador(r);
+        ControladorReservas c = new ControladorReservas(r);
         r.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnReservaActionPerformed
 
     private void btnFinanzasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinanzasActionPerformed
-        // TODO add your handling code here:
+       estadisticas e=new estadisticas();
+       e.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btnFinanzasActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -140,8 +162,18 @@ public class opciones extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFacturaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        System.exit(0);
+        OpcionesMantenimiento om=new OpcionesMantenimiento();
+        om.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNivelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,7 +196,9 @@ public class opciones extends javax.swing.JFrame {
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnReserva;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JTextField txtNivel;
     // End of variables declaration//GEN-END:variables
 }

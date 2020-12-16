@@ -249,7 +249,7 @@
         <Component class="javax.swing.JButton" name="btnAceptar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ImagenesIconos/icon_chek2.jpeg"/>
+              <Image iconType="3" name="/ImagenesIconos/comprobado.png"/>
             </Property>
           </Properties>
           <Events>
@@ -534,7 +534,7 @@
     <Component class="javax.swing.JButton" name="btnClose">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/ImagenesIconos/btnRetroceder.jpeg"/>
+          <Image iconType="3" name="/ImagenesIconos/Icono_retroceder.jpeg"/>
         </Property>
       </Properties>
       <Events>
@@ -549,7 +549,7 @@
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/ImagenesIconos/fondo_reservas2_1.jpeg"/>
+          <Image iconType="3" name="/ImagenesIconos/reservaFondo.jpeg"/>
         </Property>
       </Properties>
       <Constraints>

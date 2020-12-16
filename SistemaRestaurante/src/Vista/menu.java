@@ -1,14 +1,46 @@
-
 package Vista;
 
+import Modelo.ProductoDAO;
+import Modelo.Stock;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form menu
-     */
+    ordenMenu1 om = new ordenMenu1();
+
+    ProductoDAO pdao = new ProductoDAO();
+    Stock s = new Stock();
+
+    DefaultTableModel model = new DefaultTableModel();
+    String Nombre;
+    int idp = 0;
+    double totalFondo;//total hamburguesas
+    double totalComple;
+    double totalBebidas;
+    double total;
+    int qty = 0;
+    double subSum1 = 0;
+    double subSum2 = 0;
+    double subSum3 = 0;
+    double subSum4 = 0;
+    double subSum5 = 0;
+    double subSum6 = 0;
+    double subSum7 = 0;
+    double subSum8 = 0;
+    double subSum9 = 0;
+
     public menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+
+    public double total() {
+        total = totalFondo + totalComple + totalBebidas;
+        om.txtTotal.setText(String.valueOf(total));
+
+        return total;
     }
 
     /**
@@ -21,17 +53,17 @@ public class menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jComboBox8 = new javax.swing.JComboBox<>();
+        cbBebidas = new javax.swing.JComboBox<>();
+        cbAdicionales = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        SpinTaypa = new javax.swing.JSpinner();
+        SpinChaufa = new javax.swing.JSpinner();
+        SpinLomo = new javax.swing.JSpinner();
+        SpinAdicionales = new javax.swing.JSpinner();
+        SpinBebidas = new javax.swing.JSpinner();
+        cbTaypa = new javax.swing.JCheckBox();
+        cbChaufa = new javax.swing.JCheckBox();
+        cbLomo1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -39,133 +71,405 @@ public class menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bebidas", "Inka kola personal (2.50so)", "Coca cola personal (2.50so)", "Chicha (un vaso) (3so)", "Limonada (un vaso) (3so)" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 170, -1));
-
-        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adicionales", "1 Sopa wantan (6soles)", "6 wantanes fritos (5soles)" }));
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, -1, -1));
-
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("Chaufa de pollo 8 soles");
-        jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        cbBebidas.setBackground(new java.awt.Color(255, 255, 255));
+        cbBebidas.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        cbBebidas.setForeground(new java.awt.Color(0, 0, 0));
+        cbBebidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BEBIDAS", "Inka Kola (Personal)", "Coca Cola (Personal)", "Chicha (un vaso)", "Limonada (un vaso)" }));
+        cbBebidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                cbBebidasActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        getContentPane().add(cbBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 140, -1));
 
-        jTextField2.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("Taypa 9 soles");
-        jTextField2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        cbAdicionales.setBackground(new java.awt.Color(255, 255, 255));
+        cbAdicionales.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        cbAdicionales.setForeground(new java.awt.Color(0, 0, 0));
+        cbAdicionales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADICIONALES", "Wantanes Fritos", "Sopa Wantan" }));
+        cbAdicionales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                cbAdicionalesActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
-
-        jTextField3.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("Lomo saltado 10 soles");
-        jTextField3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
-        jComboBox4.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox4.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        jComboBox4.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox4ItemStateChanged(evt);
-            }
-        });
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
-
-        jComboBox5.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox5.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
-
-        jComboBox6.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox6.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        getContentPane().add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 40, -1));
-
-        jComboBox7.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox7.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        getContentPane().add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 40, -1));
-
-        jComboBox8.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox8.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 40, 20));
+        getContentPane().add(cbAdicionales, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, -1));
 
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 150, 60));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 150, 50));
+
+        SpinTaypa.setEnabled(false);
+        SpinTaypa.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinTaypaStateChanged(evt);
+            }
+        });
+        getContentPane().add(SpinTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 50, -1));
+
+        SpinChaufa.setEnabled(false);
+        SpinChaufa.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinChaufaStateChanged(evt);
+            }
+        });
+        getContentPane().add(SpinChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 40, -1));
+
+        SpinLomo.setEnabled(false);
+        SpinLomo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinLomoStateChanged(evt);
+            }
+        });
+        getContentPane().add(SpinLomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 50, -1));
+
+        SpinAdicionales.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinAdicionalesStateChanged(evt);
+            }
+        });
+        getContentPane().add(SpinAdicionales, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 40, -1));
+
+        SpinBebidas.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinBebidasStateChanged(evt);
+            }
+        });
+        getContentPane().add(SpinBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 40, -1));
+
+        cbTaypa.setForeground(new java.awt.Color(255, 255, 255));
+        cbTaypa.setText("Taypa 9S/.");
+        cbTaypa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTaypaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 90, -1));
+
+        cbChaufa.setForeground(new java.awt.Color(255, 255, 255));
+        cbChaufa.setText("Chaufa de pollo 8S/.");
+        cbChaufa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbChaufaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 140, -1));
+
+        cbLomo1.setForeground(new java.awt.Color(255, 255, 255));
+        cbLomo1.setText("Lomo Saltado 10S/.");
+        cbLomo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbLomo1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbLomo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/comidas1.jpeg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 510));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        ordenMenu1 o=new ordenMenu1();
-        o.setVisible(true);
-//        this.dispose();
+        om.txtTotal.setText(String.valueOf(total()));
+        int cant1 = Integer.parseInt(SpinChaufa.getValue().toString());
+        int cant2 = Integer.parseInt(SpinLomo.getValue().toString());
+        int cant3 = Integer.parseInt(SpinTaypa.getValue().toString());
+        int cant4 = Integer.parseInt(SpinAdicionales.getValue().toString());
+        int cant5 = Integer.parseInt(SpinBebidas.getValue().toString());
+        cant1=cant2=cant3=cant4=cant5=0;
+        om.setVisible(true);
+        IngresarProducto();
+
+
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    private void SpinLomoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinLomoStateChanged
+        if (cbLomo1.isSelected()) {
+            Nombre = "Lomo Saltado";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty;
+            preQty = (Integer) SpinLomo.getValue();
+            if (preQty > qty) {
+                qty = preQty;
+                subSum1 = spinRate1 * preQty;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
 
-    private void jComboBox4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox4ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ItemStateChanged
+            } else if (preQty <= qty) {
+                qty = preQty;
+                subSum1 = spinRate1 * preQty;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+        }
+        total();
+    }//GEN-LAST:event_SpinLomoStateChanged
 
-    /**
-     * @param args the command line arguments
-     */
+    private void SpinTaypaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinTaypaStateChanged
+
+        if (cbTaypa.isSelected()) {
+            Nombre = "Taypa";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQt1;
+            preQt1 = (Integer) SpinTaypa.getValue();
+            if (preQt1 > qty) {
+                qty = preQt1;
+                subSum2 = spinRate1 * preQt1;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQt1 <= qty) {
+                qty = preQt1;
+                subSum2 = spinRate1 * preQt1;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+        }
+        total();
+    }//GEN-LAST:event_SpinTaypaStateChanged
+
+    private void SpinChaufaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinChaufaStateChanged
+
+        if (cbChaufa.isSelected()) {
+            Nombre = "Chaufa de Pollo";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinChaufa.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum3 = spinRate1 * preQty2;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum3 = spinRate1 * preQty2;
+                totalFondo = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+        }
+        total();
+    }//GEN-LAST:event_SpinChaufaStateChanged
+
+    private void cbAdicionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAdicionalesActionPerformed
+
+    }//GEN-LAST:event_cbAdicionalesActionPerformed
+
+    private void cbBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBebidasActionPerformed
+
+
+    }//GEN-LAST:event_cbBebidasActionPerformed
+
+    private void SpinAdicionalesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinAdicionalesStateChanged
+        String comp;
+        comp = cbAdicionales.getSelectedItem().toString();
+
+        if (comp.compareTo("Sopa Wantan") == 0) {
+            Nombre = "Sopa Wantan";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinAdicionales.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum4 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum4 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+        } else {
+            Nombre = "Wantanes Fritos";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate2 = s.getPrecio();
+            int preQty3;
+            preQty3 = (Integer) SpinAdicionales.getValue();
+            if (preQty3 > qty) {
+                qty = preQty3;
+                subSum5 = spinRate2 * preQty3;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty3 <= qty) {
+                qty = preQty3;
+                subSum5 = spinRate2 * preQty3;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+
+        }
+        total();
+    }//GEN-LAST:event_SpinAdicionalesStateChanged
+
+    private void SpinBebidasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinBebidasStateChanged
+        String beb;
+        beb = cbBebidas.getSelectedItem().toString();
+
+        if (beb.compareTo("Inka Kola (Personal)") == 0) {
+            Nombre = "Inka Kola (Personal)";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinAdicionales.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum6 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum6 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+
+        } else if (beb.compareTo("Coca Cola (Personal)") == 0) {
+            Nombre = "Coca Cola (Personal)";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinAdicionales.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum7 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum7 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+
+        } else if (beb.compareTo("Chicha (un vaso)") == 0) {
+            Nombre = "Chicha (un vaso)";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinAdicionales.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum9 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum9 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+
+        } else {
+            Nombre = "Limonada (un vaso)";
+            s = pdao.AtraparProductos(Nombre);
+            double spinRate1 = s.getPrecio();
+            int preQty2;
+            preQty2 = (Integer) SpinAdicionales.getValue();
+            if (preQty2 > qty) {
+                qty = preQty2;
+                subSum9 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+
+            } else if (preQty2 <= qty) {
+                qty = preQty2;
+                subSum9 = spinRate1 * preQty2;
+                totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+            }
+
+        }
+    }//GEN-LAST:event_SpinBebidasStateChanged
+
+    private void cbTaypaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTaypaActionPerformed
+        Nombre = "Taypa";
+        s = pdao.AtraparProductos(Nombre);
+        double prec = s.getPrecio();
+        if (cbTaypa.isSelected()) {
+            SpinTaypa.setEnabled(true);
+            subSum2 = subSum2 + prec;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        } else {
+            SpinTaypa.setEnabled(false);
+            SpinTaypa.setValue(1);
+            subSum2 = 0;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        }
+        total();
+    }//GEN-LAST:event_cbTaypaActionPerformed
+
+    private void cbChaufaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChaufaActionPerformed
+        Nombre = "Chaufa de Pollo";
+        s = pdao.AtraparProductos(Nombre);
+        double prec = s.getPrecio();
+        if (cbChaufa.isSelected()) {
+            SpinChaufa.setEnabled(true);
+            subSum3 = subSum3 + prec;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        } else {
+            SpinChaufa.setEnabled(false);
+            SpinChaufa.setValue(1);
+            subSum3 = 0;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        }
+        total();
+    }//GEN-LAST:event_cbChaufaActionPerformed
+
+    private void cbLomo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLomo1ActionPerformed
+        Nombre = "Lomo Saltado";
+        s = pdao.AtraparProductos(Nombre);
+        double prec = s.getPrecio();
+        if (cbLomo1.isSelected()) {
+            SpinLomo.setEnabled(true);
+            subSum1 = subSum1 + prec;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        } else {
+            SpinLomo.setEnabled(false);
+            SpinLomo.setValue(1);
+            subSum1 = 0;
+            totalComple = subSum2 + subSum1 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9;
+        }
+        total();
+    }//GEN-LAST:event_cbLomo1ActionPerformed
+
+    public void IngresarProducto() {
+        double total = 0;
+        int canT;
+        int item = 0;
+        model = (DefaultTableModel) om.TablaOrden.getModel();
+        item = item + 1;
+        idp = s.getId_Stock();
+        String nomp = "Pedido";
+        double precio = s.getPrecio();
+        int cant1 = Integer.parseInt(SpinChaufa.getValue().toString());
+        int cant2 = Integer.parseInt(SpinLomo.getValue().toString());
+        int cant3 = Integer.parseInt(SpinTaypa.getValue().toString());
+        int cant4 = Integer.parseInt(SpinAdicionales.getValue().toString());
+        int cant5= Integer.parseInt(SpinBebidas.getValue().toString());
+        int stock = s.getCantidad();
+        canT = cant1 + cant2 + cant3+cant4+cant5;
+        total = total();
+        ArrayList list = new ArrayList();
+        if (stock > 0) {
+            list.add(item);
+            list.add(idp);
+            list.add(nomp);
+            list.add(canT);
+            list.add(precio);
+            list.add(total);
+            Object[] ob = new Object[6];
+            ob[0] = list.get(0);
+            ob[1] = list.get(1);
+            ob[2] = list.get(2);
+            ob[3] = list.get(3);
+            ob[4] = list.get(4);
+            ob[5] = list.get(5);
+            model.addRow(ob);
+            om.TablaOrden.setModel(model);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "No Ha seleccionado articulos");
+            om.setVisible(false);
+        }
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -194,23 +498,24 @@ public class menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new menu().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JSpinner SpinAdicionales;
+    private javax.swing.JSpinner SpinBebidas;
+    private javax.swing.JSpinner SpinChaufa;
+    private javax.swing.JSpinner SpinLomo;
+    private javax.swing.JSpinner SpinTaypa;
+    private javax.swing.JComboBox<String> cbAdicionales;
+    private javax.swing.JComboBox<String> cbBebidas;
+    private javax.swing.JCheckBox cbChaufa;
+    private javax.swing.JCheckBox cbLomo1;
+    private javax.swing.JCheckBox cbTaypa;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

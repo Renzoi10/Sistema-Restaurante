@@ -20,7 +20,7 @@ public class LOGIN extends javax.swing.JFrame {
     }
 
     public void validarAcceso(String usuario, String password) {
-        int niveldeacceso = 0;
+        int niveldeacceso;
         PreparedStatement ps;
         ResultSet rs;
         try {
@@ -36,12 +36,14 @@ public class LOGIN extends javax.swing.JFrame {
 
                         case 1:
                             opciones form = new opciones();
-                            form.setVisible(true);
+                            form.txtNivel.setText(String.valueOf(usuario));
+                            form.setVisible(true);        
                             this.dispose();
                             break;
 
                         case 2:
                             opciones1 form1 = new opciones1();
+                            form1.txtNivel.setText(String.valueOf(usuario));
                             form1.setVisible(true);
                             this.dispose();
                             break;
@@ -181,7 +183,7 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JPasswordField jPasswordField1;
+    public javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

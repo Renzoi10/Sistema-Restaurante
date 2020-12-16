@@ -28,6 +28,7 @@ public class Ganancias extends javax.swing.JFrame {
         btnCalcular = new javax.swing.JButton();
         txtFecha = new com.toedter.calendar.JDateChooser();
         btnAceptar = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,12 +113,26 @@ public class Ganancias extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar");
         getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 80, -1));
 
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/Icono_retroceder.jpeg"))); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 50, 50));
+
         jLabel1.setBackground(new java.awt.Color(255, 153, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/fondo3.jpeg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -150, 510, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        opciones o = new opciones();
+        o.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,6 +147,7 @@ public class Ganancias extends javax.swing.JFrame {
     public javax.swing.JButton btnActualizar;
     public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnClose;
     public javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

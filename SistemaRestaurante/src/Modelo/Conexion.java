@@ -17,7 +17,7 @@ public class Conexion {
     private String database = "Sistema_restaurante";
     private String classname = "com.mysql.jdbc.Driver";
     private String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
-    private Connection con;
+    Connection con;
 
     public Conexion() {
         try {
