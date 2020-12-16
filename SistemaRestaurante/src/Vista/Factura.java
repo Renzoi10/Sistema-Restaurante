@@ -5,15 +5,17 @@
  */
 package Vista;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Factura extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Factura
-     */
+    DefaultTableModel model=new DefaultTableModel();
+    
+    
     public Factura() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -52,7 +54,7 @@ public class Factura extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaOrden = new javax.swing.JTable();
+        TablaFactura = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -222,7 +224,7 @@ public class Factura extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.lightGray));
 
-        TablaOrden.setModel(new javax.swing.table.DefaultTableModel(
+        TablaFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -230,7 +232,7 @@ public class Factura extends javax.swing.JFrame {
                 "Nro", "Cod. Producto", "Nombre Producto", "Cantidad", "Precio Uni.", "Total"
             }
         ));
-        jScrollPane1.setViewportView(TablaOrden);
+        jScrollPane1.setViewportView(TablaFactura);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -360,10 +362,10 @@ public class Factura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTable TablaOrden;
+    public javax.swing.JTable TablaFactura;
     private javax.swing.JLabel btnAceptar;
     private javax.swing.JLabel btnAtras;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -386,12 +388,12 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtDNIC;
-    private javax.swing.JTextField txtMesa;
-    private javax.swing.JTextField txtMozo;
-    private javax.swing.JTextField txtNombreC;
-    private javax.swing.JTextField txtTelefonoC;
-    private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txt_IdVenta;
+    public javax.swing.JTextField txtDNIC;
+    public javax.swing.JTextField txtMesa;
+    public javax.swing.JTextField txtMozo;
+    public javax.swing.JTextField txtNombreC;
+    public javax.swing.JTextField txtTelefonoC;
+    public javax.swing.JTextField txtTotal;
+    public javax.swing.JTextField txt_IdVenta;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,9 @@ package Vista;
 import Controlador.ControladorMozo;
 import Modelo.Mozo;
 import Modelo.MozoDao;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,6 +14,8 @@ import javax.swing.JOptionPane;
 public class ordenMenu1 extends javax.swing.JFrame {
 
     MozoDao mdao = new MozoDao();
+    DefaultTableModel model = new DefaultTableModel();
+//    ordenMenu1 om=new ordenMenu1();
 
     public ordenMenu1() {
         initComponents();
@@ -77,17 +81,17 @@ public class ordenMenu1 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TablaOrden);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 450, 130));
-        getContentPane().add(txtMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 90, -1));
+        getContentPane().add(txtMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 90, -1));
 
         txtNombre_mozo.setEditable(false);
         getContentPane().add(txtNombre_mozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 90, -1));
-        getContentPane().add(txtId_Mozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 90, -1));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 90, -1));
+        getContentPane().add(txtId_Mozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 90, -1));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("N de mesa:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 325, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,16 +100,21 @@ public class ordenMenu1 extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Id moso:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
+        jLabel6.setText("Cod. Mozo:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 325, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Total:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
 
         btnGenerarFactura.setForeground(new java.awt.Color(0, 0, 0));
         btnGenerarFactura.setText("Generar Factura");
+        btnGenerarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarFacturaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGenerarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 125, -1));
 
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/atras.png"))); // NOI18N
@@ -133,6 +142,47 @@ public class ordenMenu1 extends javax.swing.JFrame {
         buscarMozo();
 
     }//GEN-LAST:event_btnMozoActionPerformed
+
+    private void btnGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarFacturaActionPerformed
+        Factura f = new Factura();
+        ordenMenu1 om = new ordenMenu1();
+        f.txtTotal.setText(String.valueOf(om.txtTotal));
+        f.txtMesa.setText(String.valueOf(om.txtMesa));
+        f.txtMozo.setText(String.valueOf(om.txtNombre_mozo));
+        GenerarFactura();
+    }//GEN-LAST:event_btnGenerarFacturaActionPerformed
+
+    public void GenerarFactura() {
+        Factura f = new Factura();
+        double total = 0;
+        int item;
+        model = (DefaultTableModel) f.TablaFactura.getModel();
+        for (int i = 0; i < TablaOrden.getRowCount(); i++) {
+            item = Integer.parseInt((String) TablaOrden.getValueAt(i, 1));
+            int idp = Integer.parseInt((String) TablaOrden.getValueAt(i, 2));
+            String nomp = (String) TablaOrden.getValueAt(i, 3);
+            int cant = Integer.parseInt((String) TablaOrden.getValueAt(i, 4));
+            double precio = Integer.parseInt((String) TablaOrden.getValueAt(i, 5));
+            total = Integer.parseInt((String) TablaOrden.getValueAt(i, 6));
+            ArrayList list = new ArrayList();
+            list.add(item);
+            list.add(idp);
+            list.add(nomp);
+            list.add(cant);
+            list.add(precio);
+            list.add(total);
+            Object[] ob = new Object[6];
+            ob[0] = list.get(0);
+            ob[1] = list.get(1);
+            ob[2] = list.get(2);
+            ob[3] = list.get(3);
+            ob[4] = list.get(4);
+            ob[5] = list.get(5);
+            model.addRow(ob);
+
+        }
+        f.TablaFactura.setModel(model);
+    }
 
     void buscarMozo() {
         int r;
