@@ -19,7 +19,9 @@ public class menu extends javax.swing.JFrame {
     double totalFondo;//total hamburguesas
     double totalComple;
     double totalBebidas;
-    double total;
+    double total, TotalP;
+    int canT;
+    double totalColum = 0;
     int qty = 0;
     double subSum1 = 0;
     double subSum2 = 0;
@@ -38,7 +40,7 @@ public class menu extends javax.swing.JFrame {
 
     public double total() {
         total = totalFondo + totalComple + totalBebidas;
-        om.txtTotal.setText(String.valueOf(total));
+//        om.txtTotal.setText(String.valueOf(total));
         return total;
     }
 
@@ -168,11 +170,11 @@ public class menu extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         om.txtTotal.setText(String.valueOf(total()));
-        cbLomo1.setEnabled(false);
-        cbAdicionales.setEnabled(false);
-        cbChaufa.setEnabled(false);
-        cbBebidas.setEnabled(false);
-        cbTaypa.setEnabled(false);
+//        cbLomo1.setSelected(false);
+//        cbAdicionales.setEnabled(false);
+//        cbChaufa.setEnabled(false);
+//        cbBebidas.setEnabled(false);
+//        cbTaypa.setEnabled(false);
         om.setVisible(true);
         IngresarProducto();
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -419,22 +421,29 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_cbLomo1ActionPerformed
 
     public void IngresarProducto() {
-        double total = 0;
-        int canT;
+
+        String nomp;
+
         int item = 0;
         model = (DefaultTableModel) om.TablaOrden.getModel();
         item = item + 1;
         idp = s.getId_Stock();
-        String nomp = "Pedido";
         double precio = s.getPrecio();
+        if (cbLomo1.isSelected() || cbChaufa.isSelected() || cbTaypa.isSelected()) {
+            nomp = "Plato de fondo";
+        } else if (cbAdicionales.getSelectedItem().toString().compareTo("Wantanes Fritos") == 0 || cbAdicionales.getSelectedItem().toString().compareTo("Sopa Wantan") == 0) {
+            nomp = "Adicionales";
+        } else {
+            nomp = "Bebidas";
+        }
         int cant1 = Integer.parseInt(SpinChaufa.getValue().toString());
         int cant2 = Integer.parseInt(SpinLomo.getValue().toString());
         int cant3 = Integer.parseInt(SpinTaypa.getValue().toString());
         int cant4 = Integer.parseInt(SpinAdicionales.getValue().toString());
-        int cant5= Integer.parseInt(SpinBebidas.getValue().toString());
+        int cant5 = Integer.parseInt(SpinBebidas.getValue().toString());
         int cantidad = s.getCantidad();
-        canT = cant1 + cant2 + cant3+cant4+cant5;
-        total = total();
+        canT = cant1 + cant2 + cant3 + cant4 + cant5;
+        totalColum = total();
         ArrayList list = new ArrayList();
         if (cantidad > 0) {
             list.add(item);
@@ -442,7 +451,7 @@ public class menu extends javax.swing.JFrame {
             list.add(nomp);
             list.add(canT);
             list.add(precio);
-            list.add(total);
+            list.add(totalColum);
             Object[] ob = new Object[6];
             ob[0] = list.get(0);
             ob[1] = list.get(1);
@@ -452,11 +461,23 @@ public class menu extends javax.swing.JFrame {
             ob[5] = list.get(5);
             model.addRow(ob);
             om.TablaOrden.setModel(model);
+            calculartotal();
         } else {
             JOptionPane.showMessageDialog(this, "No Ha seleccionado articulos");
             om.setVisible(false);
         }
 
+    }
+
+    void calculartotal() {
+
+        TotalP = 0;
+        for (int i = 0; i < om.TablaOrden.getRowCount(); i++) {
+            canT=Integer.parseInt(om.TablaOrden.getValueAt(i, 3).toString());
+            totalColum=Double.parseDouble(om.TablaOrden.getValueAt(i, 5).toString());
+            TotalP=TotalP+(canT*totalColum);
+        }
+        om.txtTotal.setText(""+TotalP);
     }
 
     public static void main(String args[]) {

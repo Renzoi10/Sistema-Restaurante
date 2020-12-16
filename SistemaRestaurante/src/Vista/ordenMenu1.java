@@ -149,7 +149,9 @@ public class ordenMenu1 extends javax.swing.JFrame {
         f.txtTotal.setText(String.valueOf(om.txtTotal));
         f.txtMesa.setText(String.valueOf(om.txtMesa));
         f.txtMozo.setText(String.valueOf(om.txtNombre_mozo));
-        GenerarFactura();
+        f.setVisible(true);
+        this.dispose();
+//        GenerarFactura();
     }//GEN-LAST:event_btnGenerarFacturaActionPerformed
 
     public void GenerarFactura() {
