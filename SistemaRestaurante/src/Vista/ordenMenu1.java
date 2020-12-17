@@ -15,6 +15,7 @@ public class ordenMenu1 extends javax.swing.JFrame {
 
     MozoDao mdao = new MozoDao();
     DefaultTableModel model = new DefaultTableModel();
+    Factura f = new Factura();
 //    ordenMenu1 om=new ordenMenu1();
 
     public ordenMenu1() {
@@ -44,7 +45,7 @@ public class ordenMenu1 extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMozo.setBackground(new java.awt.Color(255, 51, 51));
@@ -86,6 +87,8 @@ public class ordenMenu1 extends javax.swing.JFrame {
         txtNombre_mozo.setEditable(false);
         getContentPane().add(txtNombre_mozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 90, -1));
         getContentPane().add(txtId_Mozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 90, -1));
+
+        txtTotal.setEditable(false);
         getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
@@ -144,44 +147,53 @@ public class ordenMenu1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMozoActionPerformed
 
     private void btnGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarFacturaActionPerformed
-        Factura f = new Factura();
+
         ordenMenu1 om = new ordenMenu1();
-        f.txtTotal.setText(String.valueOf(om.txtTotal));
-        f.txtMesa.setText(String.valueOf(om.txtMesa));
-        f.txtMozo.setText(String.valueOf(om.txtNombre_mozo));
+
         f.setVisible(true);
+        String t = txtTotal.getText();
+        String M = txtMesa.getText();
+        String mo = txtNombre_mozo.getText();
+        f.txtTotal.setText(t);
+        f.txtMesa.setText(M);
+        f.txtMozo.setText(mo);
+        GenerarFactura();
         this.dispose();
-//        GenerarFactura();
+
     }//GEN-LAST:event_btnGenerarFacturaActionPerformed
 
     public void GenerarFactura() {
-        Factura f = new Factura();
-        double total = 0;
-        int item;
+
+//        double total = 0;
+//        int item=0;
+//        int idp;
+//        String nomp;
+//        int cant;
+//        double precio;
         model = (DefaultTableModel) f.TablaFactura.getModel();
         for (int i = 0; i < TablaOrden.getRowCount(); i++) {
-            item = Integer.parseInt((String) TablaOrden.getValueAt(i, 1));
-            int idp = Integer.parseInt((String) TablaOrden.getValueAt(i, 2));
-            String nomp = (String) TablaOrden.getValueAt(i, 3);
-            int cant = Integer.parseInt((String) TablaOrden.getValueAt(i, 4));
-            double precio = Integer.parseInt((String) TablaOrden.getValueAt(i, 5));
-            total = Integer.parseInt((String) TablaOrden.getValueAt(i, 6));
-            ArrayList list = new ArrayList();
-            list.add(item);
-            list.add(idp);
-            list.add(nomp);
-            list.add(cant);
-            list.add(precio);
-            list.add(total);
-            Object[] ob = new Object[6];
-            ob[0] = list.get(0);
-            ob[1] = list.get(1);
-            ob[2] = list.get(2);
-            ob[3] = list.get(3);
-            ob[4] = list.get(4);
-            ob[5] = list.get(5);
-            model.addRow(ob);
-
+//            item = Integer.parseInt((String) TablaOrden.getValueAt(i, 1));
+//            idp = Integer.parseInt((String) TablaOrden.getValueAt(i, 2));
+//            nomp = (String) TablaOrden.getValueAt(i, 3);
+//             cant = Integer.parseInt((String) TablaOrden.getValueAt(i, 4));
+//             precio = Integer.parseInt((String) TablaOrden.getValueAt(i, 5));
+//            total = Integer.parseInt((String) TablaOrden.getValueAt(i, 6));
+//            ArrayList list = new ArrayList();
+//            list.add(item);
+//            list.add(idp);
+//            list.add(nomp);
+//            list.add(cant);
+//            list.add(precio);
+//            list.add(total);
+            String ob[] = new String[6];
+            ob[0] = TablaOrden.getValueAt(i, 0).toString();
+            ob[1] = TablaOrden.getValueAt(i, 1).toString();
+            ob[2] = TablaOrden.getValueAt(i, 2).toString();
+            ob[3] = TablaOrden.getValueAt(i, 3).toString();
+            ob[4] = TablaOrden.getValueAt(i, 4).toString();
+            ob[5] = TablaOrden.getValueAt(i, 5).toString();
+            f.model.addRow(ob);
+            
         }
         f.TablaFactura.setModel(model);
     }

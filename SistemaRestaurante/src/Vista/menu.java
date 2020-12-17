@@ -60,6 +60,7 @@ public class menu extends javax.swing.JFrame {
         cbTaypa = new javax.swing.JCheckBox();
         cbChaufa = new javax.swing.JCheckBox();
         cbLomo1 = new javax.swing.JCheckBox();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -102,7 +103,7 @@ public class menu extends javax.swing.JFrame {
                 SpinTaypaStateChanged(evt);
             }
         });
-        getContentPane().add(SpinTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 50, -1));
+        getContentPane().add(SpinTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 50, -1));
 
         SpinChaufa.setEnabled(false);
         SpinChaufa.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -110,7 +111,7 @@ public class menu extends javax.swing.JFrame {
                 SpinChaufaStateChanged(evt);
             }
         });
-        getContentPane().add(SpinChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 40, -1));
+        getContentPane().add(SpinChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 40, -1));
 
         SpinLomo.setEnabled(false);
         SpinLomo.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -118,7 +119,7 @@ public class menu extends javax.swing.JFrame {
                 SpinLomoStateChanged(evt);
             }
         });
-        getContentPane().add(SpinLomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 50, -1));
+        getContentPane().add(SpinLomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 50, -1));
 
         SpinAdicionales.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -135,31 +136,39 @@ public class menu extends javax.swing.JFrame {
         getContentPane().add(SpinBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 40, -1));
 
         cbTaypa.setForeground(new java.awt.Color(255, 255, 255));
-        cbTaypa.setText("Taypa 9S/.");
+        cbTaypa.setText("Taypa");
         cbTaypa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTaypaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 90, -1));
+        getContentPane().add(cbTaypa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 80, -1));
 
         cbChaufa.setForeground(new java.awt.Color(255, 255, 255));
-        cbChaufa.setText("Chaufa de pollo 8S/.");
+        cbChaufa.setText("Chaufa de pollo");
         cbChaufa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbChaufaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 140, -1));
+        getContentPane().add(cbChaufa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 120, -1));
 
         cbLomo1.setForeground(new java.awt.Color(255, 255, 255));
-        cbLomo1.setText("Lomo Saltado 10S/.");
+        cbLomo1.setText("Lomo Saltado");
         cbLomo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbLomo1ActionPerformed(evt);
             }
         });
-        getContentPane().add(cbLomo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, -1));
+        getContentPane().add(cbLomo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 110, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/atras (2).png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesIconos/comidas1.jpeg"))); // NOI18N
@@ -420,6 +429,12 @@ public class menu extends javax.swing.JFrame {
         total();
     }//GEN-LAST:event_cbLomo1ActionPerformed
 
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        OpcionesMantenimiento o = new OpcionesMantenimiento();
+        o.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
+
     public void IngresarProducto() {
 
         String nomp;
@@ -475,7 +490,7 @@ public class menu extends javax.swing.JFrame {
         for (int i = 0; i < om.TablaOrden.getRowCount(); i++) {
             canT=Integer.parseInt(om.TablaOrden.getValueAt(i, 3).toString());
             totalColum=Double.parseDouble(om.TablaOrden.getValueAt(i, 5).toString());
-            TotalP=TotalP+(canT*totalColum);
+            TotalP=TotalP+(totalColum);
         }
         om.txtTotal.setText(""+TotalP);
     }
@@ -526,6 +541,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbTaypa;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
