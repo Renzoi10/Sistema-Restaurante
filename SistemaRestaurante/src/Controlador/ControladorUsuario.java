@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @author Melissa Ponce
  */
-public class ControladorUsuario  implements ActionListener{
-    
-     UsuarioDAO dao = new UsuarioDAO();
+public class ControladorUsuario implements ActionListener {
+
+    UsuarioDAO dao = new UsuarioDAO();
     usuarios usu = new usuarios();
     MantUsuario mu = new MantUsuario();
     DefaultTableModel modelo = new DefaultTableModel();
@@ -94,7 +94,7 @@ public class ControladorUsuario  implements ActionListener{
     public void listar(JTable tabla) {
         modelo = (DefaultTableModel) tabla.getModel();
         List<usuarios> lista = dao.listarUsuario();
-        Object[] object = new Object[5];
+        Object[] object = new Object[3];
         for (int i = 0; i < lista.size(); i++) {
             object[0] = lista.get(i).getUsuario();
             object[1] = lista.get(i).getPassword();

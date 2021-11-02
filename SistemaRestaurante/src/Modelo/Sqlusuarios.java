@@ -37,23 +37,4 @@ public class Sqlusuarios extends Conexion {
         return u;
     }
 
-    public int NivelAcceso(int id) {
-        String sql = "SELECT Level_Acces FROM usuarios WHERE id=?";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConnection();
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-            return 1;
-        } catch (Exception e) {
-
-            return 1;
-        }
-
-    }
 }

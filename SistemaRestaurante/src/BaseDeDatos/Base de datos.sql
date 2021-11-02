@@ -35,10 +35,6 @@ primary key  (id_Reserva)
 
 
 
-
-
-
-
 create table Mozos(
 id_Moso varchar(20) not null,
 Nombre_Apellido varchar(50) not null,
